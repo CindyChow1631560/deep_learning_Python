@@ -35,7 +35,42 @@ def softmax(x):
     exp_sum = np.sum(exp_x)
     y = exp_x/exp_sum
     
-    return y    
+    return y   
+
+
+def mean_squared_error(x,y):
+    return 0.5*np.sum((x-y)**2)
+    
+def cross_entropy_error(x,y):
+    delta = 1e-10
+    return -np.sum(y*np.log(x+delta))
+
+def numerical_gradient(f,x):
+    h = 1e-4
+    gradient = np.zeros_like(x)
+    
+    for i in range(x.size):
+        temp = x[i]
+        x[i] = temp-h
+        fx1 = f(x)
+        
+        x[i] = temp+h
+        fx2 = f(x)
+        gradient[i] = (fx2-fx1)/(2*h)
+        x[i] = temp
+        
+    return gradient
+    
+
+def gradient_descent(f,init_x,lr=0.01,step=100):
+    x = init_x
+    
+    for i in range(step):
+        grad = numerical_gradient(f,x)
+        x = -lr*grad
+        
+    return x
+    
 #A=np.array([[1,2],[3,4]])
 #B=np.array([[5,6],[7,8]])
 #C=np.dot(A,B)
@@ -46,6 +81,15 @@ def softmax(x):
 #plt.plot(x, y)
 #plt.ylim(-1.0,1.0)
 #plt.show()
+    
+""" mini-batch"""
+
+batch_size = 10
+train_size = x_train.shape[0]
+batch_mask = np.random.choice(train_size,batch_size)
+x_batch = x_train[batch_mask]
+y_batch = y_train[batch_mask]
+
 
 """ neural network creation """
 def init_network():
