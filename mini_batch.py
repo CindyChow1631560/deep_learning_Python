@@ -4,7 +4,7 @@ Created on Mon Feb 25 15:04:43 2019
 
 @author: 
     
-TOo represent mini-batch method
+To represent mini-batch method
 """
 
 import sys,os
