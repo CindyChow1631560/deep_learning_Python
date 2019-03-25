@@ -35,8 +35,8 @@ WIDTH = image.size[1]
 for i in range(HEIGHT):
     for j in range(WIDTH):
         data = image.getpixel((i,j)) #获取该图片的所有像素点
-        if(data[0]>100 and data[1]>100 and data[2]>100): # 如果RGBA值中的RGB值均大于100
-            img1 = image.putpixel((i,j),(255,210,10,0)) # 将这些像素点改为红色
+        if(data[0]>2 and data[1]>2 and data[2]>2): # 如果RGBA值中的RGB值均大于100
+            img1 = image.putpixel((i,j),(200,150,10,1)) # 将这些像素点改为红色
 plt.figure()
 plt.show(img1)
 
